@@ -7,22 +7,22 @@ import Hospital from '../models/Hospital.js'
 // ✅ Add new sample
 export const createSample = async (req, res) => {
   try {
-    const { agentId, hospitalId, patientName } = req.body
+    const { agent, hospital, patientName } = req.body
 
-    if (!agentId || !hospitalId || !patientName) {
-      return res.status(400).json({ error: 'agentId, hospitalId, and patientName are required.' })
+    if (!agent || !hospital || !patientName) {
+      return res.status(400).json({ error: 'agent, hospital, and patientName are required.' })
     }
 
-    const agentExists = await Agent.findById(agentId)
-    const hospitalExists = await Hospital.findById(hospitalId)
+    const agentExists = await Agent.findById(agent)
+    const hospitalExists = await Hospital.findById(hospital)
 
     if (!agentExists || !hospitalExists) {
       return res.status(404).json({ error: 'Agent or Hospital not found.' })
     }
 
     const sample = await Sample.create({
-      agent: agentId,
-      hospital: hospitalId,
+      agent,
+      hospital,
       patientName
     })
 
