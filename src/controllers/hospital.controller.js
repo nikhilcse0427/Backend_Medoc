@@ -1,9 +1,14 @@
+// controllers/hospitalController.js
+import Hospital from '../models/Hospital.js'
+
 export const createHospital = async (req, res) => {
   try {
     const { name, address, contactPerson, phone } = req.body
+
     if (!name || !address || !contactPerson || !phone) {
       return res.status(400).json({ error: 'All fields are required' })
     }
+
     const hospital = await Hospital.create({ name, address, contactPerson, phone })
     res.status(201).json(hospital)
   } catch (err) {
@@ -18,4 +23,4 @@ export const getHospitals = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: 'Server error' })
   }
-} 
+}

@@ -1,10 +1,9 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const hospitalSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  address: { type: String, required: true },
-  contactPerson: { type: String, required: true },
-  phone: { type: String, required: true }
-}, { timestamps: true })
+  name: String,
+  location: String,
+  doctors: Number,
+});
 
-export default mongoose.model('Hospital', hospitalSchema) 
+export default mongoose.models.Hospital || mongoose.model("Hospital", hospitalSchema);
